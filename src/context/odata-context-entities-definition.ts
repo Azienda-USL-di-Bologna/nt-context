@@ -9,15 +9,7 @@ export class OdataContextEntitiesDefinition extends OdataContextDefinition {
 
     public buildOdataContext(config: ContextModuleConfig) {
         if (!this.odataContext) {
-            super.setCustomConfiguration(config.defaultTimeZoneOffset, config.defaultCurrency);
-            this.odataContext = new ODataContext({
-                url: config.odataBaseUrl,
-                entities:super.getOdataContextServerObjectsDefinition(config.entities),
-                beforeSend: function (request: any) {
-                    console.info(JSON.stringify(request));
-                    request.headers = {"Authorization": "Bearer " + config.tokenProvider()};
-                }
-            });
+            super.buildCommonOdataContext(config.entities, config);
             const entities: Array<string> = Object.getOwnPropertyNames(config.entities);
             for (const entity of entities) {
                 this.odataContext[config.entities[entity].name].on("updating", (keys, values) => {

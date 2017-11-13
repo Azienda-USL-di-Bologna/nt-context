@@ -8,25 +8,17 @@ export class OdataContextViewsDefinition extends OdataContextDefinition {
     }
 
     public buildOdataContext(config: ContextModuleConfig) {
-        if (!this.odataContext) {
-            super.setCustomConfiguration(config.defaultTimeZoneOffset, config.defaultCurrency);
-            this.odataContext = new ODataContext({
-                url: config.odataBaseUrl,
-                entities:super.getOdataContextServerObjectsDefinition(config.views),
-                beforeSend: function (request: any) {
-                    console.info(JSON.stringify(request));
-                    request.headers = {"Authorization": "Bearer " + config.tokenProvider()};
-                }
-            });
-            const views: Array<string> = Object.getOwnPropertyNames(config.views);
-            for (const view of views) {
-                this.odataContext[config.views[view].name].on("updating", (keys, values) => {
-                    super.fixUpdate(keys, values, config.views[view].name);
-                });
-                this.odataContext[config.views[view].name].on("inserting", (values) => {
-                    super.fixUpdate(null, values, config.views[view].name);
-                });
-            }
-        }
+      if (!this.odataContext) {
+        super.buildCommonOdataContext(config.entities, config);
+        // const entities: Array<string> = Object.getOwnPropertyNames(config.entities);
+        // for (const entity of entities) {
+        //   this.odataContext[config.entities[entity].name].on("updating", (keys, values) => {
+        //     super.fixUpdate(keys, values, config.entities[entity].name);
+        //   });
+        //   this.odataContext[config.entities[entity].name].on("inserting", (values) => {
+        //     super.fixUpdate(null, values, config.entities[entity].name);
+        //   });
+        // }
+      }
     }
 }

@@ -16,6 +16,28 @@ export abstract class OdataContextDefinition {
 
     public abstract buildOdataContext(config: ContextModuleConfig);
 
+    protected buildCommonOdataContext(serverObjects: ServerObjectsDescriptor, config: ContextModuleConfig) {
+      if (!this.odataContext) {
+        this.setCustomConfiguration(config.defaultTimeZoneOffset, config.defaultCurrency);
+        if (config.tokenProvider) {
+          this.odataContext = new ODataContext({
+            url: config.odataBaseUrl,
+            entities: this.getOdataContextServerObjectsDefinition(serverObjects),
+            beforeSend: function (request: any) {
+              console.info(JSON.stringify(request));
+              request.headers = {"Authorization": "Bearer " + config.tokenProvider()};
+            }
+          });
+        }
+        else {
+          this.odataContext = new ODataContext({
+            url: config.odataBaseUrl,
+            entities: this.getOdataContextServerObjectsDefinition(serverObjects),
+          });
+        }
+      }
+    }
+
     public getContext(): ODataContext {
         return this.odataContext;
     }
@@ -25,7 +47,7 @@ export abstract class OdataContextDefinition {
         return entities.reduce((obj: any, serverObject: any) => {obj[serverObjectsDescriptor[serverObject].name] = serverObjectsDescriptor[serverObject].class.getOdataContextEntity(); return obj}, {});
     }
 
-    protected fixUpdate(keys, values, serverObjectName) {
+    public fixUpdate(keys, values, serverObjectName) {
         // console.log(keys, values, serverObjectName);
 
         // const fields = this.dataSource.store()["_fieldTypes"];
