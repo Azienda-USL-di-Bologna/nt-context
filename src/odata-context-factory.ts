@@ -1,5 +1,4 @@
 import {Inject, Injectable} from "@angular/core";
-import {OdataContextDefinition} from "./odata-context-definition";
 import {ContextModuleConfig} from "./context-module-config";
 import {OdataContextEntitiesDefinition} from "./odata-context-entities-definition";
 import {OdataContextViewsDefinition} from "./odata-context-views-definition";

@@ -1,0 +1,28 @@
+{
+	"name": "nt-angular-context",
+	"version": "1.0.0",
+	"description": "angular module to manage devextreme OdataContext and other context utilities",
+	"main": "bundles/nt-angular-context.umd.min.js",
+	"module": "index.js",
+	"typings": "index.d.ts",
+	"keywords": [
+		"angular", "odata", "devextreme", "babel", "bdm", "gdm", "zuk", "nt"
+	],
+	"author": {
+		"name": "gdm",
+		"email": ""
+	},
+	"license": "",
+	"homepage": "",
+	"bugs": {
+		"url": ""
+	},
+	"peerDependencies": {
+		"@angular/core": "~5",
+		"reflect-metadata": "latest",
+		"rxjs": "~5",
+		"zone.js": "latest",
+		"@types/node": "~8",
+		"devextreme": "~17"
+	}
+}

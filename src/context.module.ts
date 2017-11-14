@@ -1,5 +1,5 @@
-import {ModuleWithProviders, NgModule} from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {ModuleWithProviders, NgModule} from "@angular/core";
+import { CommonModule } from "@angular/common";
 import {ContextModuleConfig} from "./context-module-config";
 import {SharedData} from "./shared-data";
 import {OdataContextFactory} from "./odata-context-factory";

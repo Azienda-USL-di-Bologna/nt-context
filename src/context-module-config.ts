@@ -20,7 +20,7 @@ export interface FunctionImportDescriptor extends ServerObjectDescriptor {
     class: typeof FunctionImport
 }
 
-export declare type ServerObjectsDescriptor  = {
+export type ServerObjectsDescriptor  = {
     [key: string]: ServerObjectDescriptor
 }
 

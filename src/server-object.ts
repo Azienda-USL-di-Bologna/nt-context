@@ -57,9 +57,7 @@ export abstract class ServerObject {
    * @returns {boolean}
    */
   private static arrayEquals(array1: Array<any>, array2: Array<any>): boolean {
-    return arraysAreEqual(array1, array2, (a, b) => {
-      return ServerObject.isEquals(a, b)
-    });
+    return arraysAreEqual(array1, array2, ServerObject.isEquals);
   }
 
   /**

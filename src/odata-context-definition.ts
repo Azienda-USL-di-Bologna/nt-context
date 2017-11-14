@@ -1,7 +1,7 @@
 import {ContextModuleConfig, ServerObjectsDescriptor} from "./context-module-config";
 import ODataContext from "devextreme/data/odata/context";
 import {keyConverters, EdmLiteral} from "devextreme/data/odata/utils";
-import * as moment from "moment";
+import moment from "moment";
 import * as config from "devextreme/core/config";
 import {OdataForeignKey} from "./server-object";
 import {CustomLoadingFilterParams} from "./custom-loading-filter-params";
@@ -16,7 +16,7 @@ export abstract class OdataContextDefinition {
 
     public abstract buildOdataContext(config: ContextModuleConfig);
 
-    protected buildCommonOdataContext(serverObjects: ServerObjectsDescriptor, config: ContextModuleConfig) {
+    protected buildCommonOdataContext(config: ContextModuleConfig, serverObjects: ServerObjectsDescriptor) {
       if (!this.odataContext) {
         this.setCustomConfiguration(config.defaultTimeZoneOffset, config.defaultCurrency);
         if (config.tokenProvider) {
@@ -25,7 +25,7 @@ export abstract class OdataContextDefinition {
             entities: this.getOdataContextServerObjectsDefinition(serverObjects),
             beforeSend: function (request: any) {
               console.info(JSON.stringify(request));
-              request.headers = {"Authorization": "Bearer " + config.tokenProvider()};
+              request.headers = {"Authorization": "Bearer " + config.tokenProvider!()};
             }
           });
         }

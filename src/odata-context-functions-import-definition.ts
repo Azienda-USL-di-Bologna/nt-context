@@ -1,6 +1,5 @@
-import ODataContext from "devextreme/data/odata/context";
 import {OdataContextDefinition} from "./odata-context-definition";
-import {ContextModuleConfig} from "./context-module-config";
+import {ContextModuleConfig, ServerObjectsDescriptor} from "./context-module-config";
 export class OdataContextFunctionsImportDefinition extends OdataContextDefinition {
 
     constructor(){
@@ -9,7 +8,7 @@ export class OdataContextFunctionsImportDefinition extends OdataContextDefinitio
 
     public buildOdataContext(config: ContextModuleConfig) {
       if (!this.odataContext) {
-        super.buildCommonOdataContext(config.functionsImport, config);
+        super.buildCommonOdataContext(config, <ServerObjectsDescriptor>config.functionsImport);
         // const entities: Array<string> = Object.getOwnPropertyNames(config.entities);
         // for (const entity of entities) {
         //   this.odataContext[config.entities[entity].name].on("updating", (keys, values) => {
