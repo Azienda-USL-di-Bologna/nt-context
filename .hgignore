@@ -6,3 +6,4 @@ e2e
 node_modules
 dist
 npm-debug.log
+.tmp
