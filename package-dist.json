@@ -1,6 +1,6 @@
 {
 	"name": "@bds/nt-angular-context",
-	"version": "1.0.3",
+	"version": "1.0.4",
 	"description": "angular module to manage devextreme OdataContext and other context utilities",
 	"main": "bundles/nt-angular-context.umd.min.js",
 	"module": "index.js",
