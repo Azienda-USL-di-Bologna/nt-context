@@ -83,8 +83,11 @@ export abstract class OdataContextDefinition {
         };
 
         keyConverters["DateTime"] = function (value) {
-            const formattedDate = moment(value).format("YYYY-MM-DDTHH:mm:ss");
-            return new EdmLiteral("datetime'" + formattedDate + "'");
+            if (value != null) {
+                const formattedDate = moment(value).format("YYYY-MM-DDTHH:mm:ss");
+                return new EdmLiteral("datetime'" + formattedDate + "'");
+            }
+            return new EdmLiteral("null");
         };
 
         const configObj = {
