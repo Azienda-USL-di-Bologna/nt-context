@@ -1,10 +1,10 @@
 import {ModuleWithProviders, NgModule} from "@angular/core";
 import { CommonModule } from "@angular/common";
 import {ContextModuleConfig} from "./context-module-config";
-import {SharedData} from "./shared-data";
 import {OdataContextFactory} from "./odata-context-factory";
 import {RouteReuseStrategy} from "@angular/router";
 import {CustomReuseStrategy} from "./Routes/custom-reuse-strategy";
+import {GlobalContextService} from "./global-context.service";
 
 
 
@@ -22,7 +22,7 @@ export class ContextModule {
       providers: [
           OdataContextFactory,
           {provide: 'config', useValue: config},
-          SharedData,
+          GlobalContextService,
           {provide: RouteReuseStrategy, useClass: CustomReuseStrategy}
           ]
     }
