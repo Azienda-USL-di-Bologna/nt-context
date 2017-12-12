@@ -26,15 +26,17 @@ export abstract class ServerObject {
         if (isArray(obj1[prop])) {
           if (!isArray(obj2[prop])) {
             return false;
-          }
-          else {
+          }else {
             console.log(obj1[prop], obj2[prop]);
             if (!ServerObject.arrayEquals(obj1[prop], obj2[prop])) {
               return false;
             }
           }
-        }
-        else {
+        }else if(obj1[prop] instanceof Date && obj2[prop] instanceof Date){
+					if(obj1[prop].getTime() !== obj2[prop].getTime()){
+						return false;
+					}
+				}else {
           if (!obj2[prop] || typeof obj2[prop] !== "object")
             return false;
           else if (!ServerObject.isEquals(obj1[prop], obj2[prop])) {
