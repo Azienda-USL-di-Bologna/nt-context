@@ -32,7 +32,7 @@ export abstract class ServerObject {
               return false;
             }
           }
-        }else if(obj1[prop] instanceof Date && obj2[prop] instanceof Date){
+        }else if(obj2[prop] && typeof obj2[prop] === "object" && obj1[prop] instanceof Date && obj2[prop] instanceof Date){
 					if(obj1[prop].getTime() !== obj2[prop].getTime()){
 						return false;
 					}
