@@ -33,7 +33,7 @@ export class GlobalContextService {
 
     public setSubjectInnerSharedObject(name: string, innerSharedObject:any): void{
         if (!this._subjectSharedObject[name]){
-            this._subjectSharedObject[name] = new Subject();
+            this._subjectSharedObject[name] = new BehaviorSubject(null);
         }
         this._subjectSharedObject[name].next(innerSharedObject);
     }
