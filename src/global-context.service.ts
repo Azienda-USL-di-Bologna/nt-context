@@ -28,6 +28,9 @@ export class GlobalContextService {
     private _subjectSharedObject: SubjectSharedObject = {};
 
     public getSubjectInnerSharedObject(name: string): Observable<any>{
+        if (!this._subjectSharedObject[name]){
+            this._subjectSharedObject[name] = new BehaviorSubject(null);
+        }
         return this._subjectSharedObject[name].asObservable();
     }
 
