@@ -28,12 +28,15 @@ export class GlobalContextService {
     private _subjectSharedObject: SubjectSharedObject = {};
 
     public getSubjectInnerSharedObject(name: string): Observable<any>{
+        if (!this._subjectSharedObject[name]){
+            this._subjectSharedObject[name] = new BehaviorSubject(null);
+        }
         return this._subjectSharedObject[name].asObservable();
     }
 
     public setSubjectInnerSharedObject(name: string, innerSharedObject:any): void{
         if (!this._subjectSharedObject[name]){
-            this._subjectSharedObject[name] = new Subject();
+            this._subjectSharedObject[name] = new BehaviorSubject(null);
         }
         this._subjectSharedObject[name].next(innerSharedObject);
     }
