@@ -94,6 +94,10 @@ export abstract class OdataContextDefinition {
             defaultCurrency: DefaultCurrency,
             forceIsoDateParsing: true
         };
+
+        Date.prototype.toJSON = function () {
+            return moment(this).format();
+        };
         config.default(configObj);
     }
 
