@@ -1,20 +1,23 @@
 import {ModuleWithProviders, NgModule} from "@angular/core";
-import { CommonModule } from "@angular/common";
+import {CommonModule} from "@angular/common";
 import {ContextModuleConfig} from "./context-module-config";
 import {OdataContextFactory} from "./odata-context-factory";
-import {RouteReuseStrategy} from "@angular/router";
+import {RouteReuseStrategy, RouterModule} from "@angular/router";
 import {CustomReuseStrategy} from "./Routes/custom-reuse-strategy";
 import {GlobalContextService} from "./global-context.service";
-
+import {NavbarService} from "./Templates/navbar/navbar.service";
+import {NavbarComponent} from "./Templates/navbar/navbar.component";
 
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
+    RouterModule
   ],
-  declarations: []
+  declarations: [
+    NavbarComponent
+  ]
 })
-
 export class ContextModule {
   static forRoot(config: ContextModuleConfig): ModuleWithProviders {
     return {
@@ -23,8 +26,9 @@ export class ContextModule {
           OdataContextFactory,
           {provide: 'config', useValue: config},
           GlobalContextService,
-          {provide: RouteReuseStrategy, useClass: CustomReuseStrategy}
-          ]
+          {provide: RouteReuseStrategy, useClass: CustomReuseStrategy},
+          NavbarService
+      ]
     }
   }
 }

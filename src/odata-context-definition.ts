@@ -24,7 +24,7 @@ export abstract class OdataContextDefinition {
             url: config.odataBaseUrl,
             entities: this.getOdataContextServerObjectsDefinition(serverObjects),
             beforeSend: function (request: any) {
-              console.info(JSON.stringify(request));
+              // console.info(JSON.stringify(request));
               request.headers = {"Authorization": "Bearer " + config.tokenProvider!()};
             }
           });
@@ -53,7 +53,7 @@ export abstract class OdataContextDefinition {
         // const fields = this.dataSource.store()["_fieldTypes"];
         const fields = this.odataContext[serverObjectName]._fieldTypes;
         for (const value in values) {
-            console.log("value", value);
+            // console.log("value", value);
             if (!fields[value]) {
                 delete values[value];
             }

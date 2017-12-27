@@ -75,8 +75,8 @@ export class CustomReuseStrategy implements RouteReuseStrategy {
 
     /**
      * Determines whether or not there is a stored route and, if there is, whether or not it should be rendered in place of requested route
-     * All'interno di componentsReuseList c'è la lista dei componenti da caricare dalla cache, se il path del componente che si deve renderizzare è presente nella lista
-     * se caricato dalla cache, il riferimento viene rimosso da componentsReuseList
+     * All'interno di componentsReuseList c'è la lista dei componenti da caricare dalla cache, il componente viene caricato se il suo path è presente nella lista.
+     * Se il componente viene ricaricato dalla cache, il riferimento viene rimosso da componentsReuseList
      * oppure nella lista troviamo un "*" lo carica dalla cache, altrimenti no
      * @param route The route the user requested
      * @returns boolean indicating whether or not to render the stored route
