@@ -9,6 +9,10 @@ export class OdataContextFactory {
     constructor(@Inject('config') private config: ContextModuleConfig) {
     }
 
+    public setOdataBaseUrl(baseUrl: string) {
+        this.config.odataBaseUrl = baseUrl;
+    }
+
     public buildOdataContextEntitiesDefinition(): OdataContextEntitiesDefinition {
         const odataContextEntitiesDefinition: OdataContextEntitiesDefinition = new OdataContextEntitiesDefinition();
         odataContextEntitiesDefinition.buildOdataContext(this.config);
