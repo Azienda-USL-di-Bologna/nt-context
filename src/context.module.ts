@@ -3,11 +3,11 @@ import {CommonModule} from "@angular/common";
 import {ContextModuleConfig} from "./context-module-config";
 import {OdataContextFactory} from "./odata-context-factory";
 import {RouteReuseStrategy, RouterModule} from "@angular/router";
-import {CustomReuseStrategy} from "./Routes/custom-reuse-strategy";
+import {CustomReuseStrategy} from "./routes/custom-reuse-strategy";
 import {GlobalContextService} from "./global-context.service";
-import {NavbarService} from "./Templates/navbar/navbar.service";
-import {NavbarComponent} from "./Templates/navbar/navbar.component";
-
+import {NavbarService} from "./templates/navbar/navbar.service";
+import {NavbarComponent} from "./templates/navbar/navbar.component";
+import {SidebarComponent} from "./templates/sidebar/sidebar.component";
 
 @NgModule({
   imports: [
@@ -15,7 +15,12 @@ import {NavbarComponent} from "./Templates/navbar/navbar.component";
     RouterModule
   ],
   declarations: [
-    NavbarComponent
+    NavbarComponent,
+    SidebarComponent
+  ],
+  exports: [
+    NavbarComponent,
+    SidebarComponent
   ]
 })
 export class ContextModule {

@@ -6,9 +6,9 @@ export class OdataContextViewsDefinition extends OdataContextDefinition {
         super()
     }
 
-    public buildOdataContext(config: ContextModuleConfig) {
+    public buildOdataContext(config: ContextModuleConfig): void {
       if (!this.odataContext) {
-        super.buildCommonOdataContext(config, <ServerObjectsDescriptor>config.views);
+        super.buildCommonOdataContext(config, <ServerObjectsDescriptor> config.views);
         // const entities: Array<string> = Object.getOwnPropertyNames(config.entities);
         // for (const entity of entities) {
         //   this.odataContext[config.entities[entity].name].on("updating", (keys, values) => {

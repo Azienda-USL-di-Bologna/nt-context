@@ -1,7 +1,7 @@
 import {ContextModuleConfig, ServerObjectsDescriptor} from "./context-module-config";
 import ODataContext from "devextreme/data/odata/context";
 import {keyConverters, EdmLiteral} from "devextreme/data/odata/utils";
-import moment from "moment";
+import * as moment from "moment";
 import * as config from "devextreme/core/config";
 import {OdataForeignKey} from "./server-object";
 import {CustomLoadingFilterParams} from "./custom-loading-filter-params";
@@ -14,9 +14,9 @@ export abstract class OdataContextDefinition {
     //     console.log(this.getOdataContextEntitiesDefinition(config.entities));
     // }
 
-    public abstract buildOdataContext(config: ContextModuleConfig);
+    public abstract buildOdataContext(config: ContextModuleConfig): void;
 
-    protected buildCommonOdataContext(config: ContextModuleConfig, serverObjects: ServerObjectsDescriptor) {
+    protected buildCommonOdataContext(config: ContextModuleConfig, serverObjects: ServerObjectsDescriptor): void {
       if (!this.odataContext) {
         this.setCustomConfiguration(config.defaultTimeZoneOffset, config.defaultCurrency);
         if (config.tokenProvider) {
@@ -47,15 +47,15 @@ export abstract class OdataContextDefinition {
         return entities.reduce((obj: any, serverObject: any) => {obj[serverObjectsDescriptor[serverObject].name] = serverObjectsDescriptor[serverObject].class.getOdataContextEntity(); return obj}, {});
     }
 
-    public fixUpdate(keys, values, serverObjectName) {
+    public fixUpdate(keys: any, values: any, serverObjectName: string): void {
         // console.log(keys, values, serverObjectName);
 
         // const fields = this.dataSource.store()["_fieldTypes"];
-        const fields = this.odataContext[serverObjectName]._fieldTypes;
+        const fields: any = (<any> this.odataContext)[serverObjectName]._fieldTypes;
         for (const value in values) {
             // console.log("value", value);
             if (!fields[value]) {
-                delete values[value];
+                delete (values)[value];
             }
         }
 
@@ -69,7 +69,7 @@ export abstract class OdataContextDefinition {
         // console.log(values);
     }
 
-    protected setCustomConfiguration(defaultTimeZoneOffset: number, DefaultCurrency: string) {
+    protected setCustomConfiguration(defaultTimeZoneOffset: number, DefaultCurrency: string): void {
 
         // customizzazione per filtri sulle date
 
@@ -82,7 +82,7 @@ export abstract class OdataContextDefinition {
             return defaultTimeZoneOffset;
         };
 
-        keyConverters["DateTime"] = function (value) {
+        keyConverters["DateTime"] = function (value: any) {
             if (value != null) {
                 const formattedDate = moment(value).format("YYYY-MM-DDTHH:mm:ss");
                 return new EdmLiteral("datetime'" + formattedDate + "'");
@@ -101,7 +101,7 @@ export abstract class OdataContextDefinition {
         config.default(configObj);
     }
 
-    public customLoading (loadOption: any) {
+    public customLoading (loadOption: any): void {
         const customLoadingFilterParams: CustomLoadingFilterParams = loadOption.userData["customLoadingFilterParams"]
         // console.log("custom", customLoadingFilterParams);
         // console.log("option", loadOption);
@@ -128,7 +128,7 @@ export abstract class OdataContextDefinition {
         }
     }
 
-    private buildFilter(filter: any, target: string, value: any) {
+    private buildFilter(filter: any, target: string, value: any): void {
         let stringFilter = JSON.stringify(filter);
         stringFilter = stringFilter.replace("${target}", target);
         if (typeof(value) === "string") {

@@ -87,16 +87,16 @@ export class CustomReuseStrategy implements RouteReuseStrategy {
         let attach: boolean = false;
 
         if (route && route.routeConfig && route.routeConfig.path) {
-            const path = CustomReuseStrategy.componentsReuseList.find(e => e === route.routeConfig!.path);
-            if (path) {
+            const path: string[] = CustomReuseStrategy.componentsReuseList.filter((e) => e === route.routeConfig!.path);
+            if (path && path.length > 0) {
                 attach = true;
-                CustomReuseStrategy.componentsReuseList = CustomReuseStrategy.componentsReuseList.filter(e => e !== path);
-            }
-            else {
-                const star = CustomReuseStrategy.componentsReuseList.find(e => e === "*");
-                if (star) {
+                CustomReuseStrategy.componentsReuseList = CustomReuseStrategy.componentsReuseList.filter((e) => e !== path[0]);
+            } else {
+                // const star = CustomReuseStrategy.componentsReuseList.find(e => e === "*");
+                const star: string[] = CustomReuseStrategy.componentsReuseList.filter((value) => value  === "*");
+                if (star && star.length > 0) {
                     attach = true;
-                    CustomReuseStrategy.componentsReuseList = CustomReuseStrategy.componentsReuseList.filter(e => e !== star);
+                    CustomReuseStrategy.componentsReuseList = CustomReuseStrategy.componentsReuseList.filter((e) => e !== star[0]);
                 }
             }
         }

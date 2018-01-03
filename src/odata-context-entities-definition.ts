@@ -6,15 +6,15 @@ export class OdataContextEntitiesDefinition extends OdataContextDefinition {
         super()
     }
 
-    public buildOdataContext(config: ContextModuleConfig) {
+    public buildOdataContext(config: ContextModuleConfig): void {
         if (!this.odataContext) {
             super.buildCommonOdataContext(config, config.entities);
-            const entities: Array<string> = Object.getOwnPropertyNames(config.entities);
+            const entities: string[] = Object.getOwnPropertyNames(config.entities);
             for (const entity of entities) {
-                this.odataContext[config.entities[entity].name].on("updating", (keys, values) => {
+              (this.odataContext as any)[config.entities[entity].name].on("updating", (keys: any, values: any) => {
                     super.fixUpdate(keys, values, config.entities[entity].name);
                 });
-                this.odataContext[config.entities[entity].name].on("inserting", (values) => {
+              (this.odataContext as any)[config.entities[entity].name].on("inserting", (values: any) => {
                     super.fixUpdate(null, values, config.entities[entity].name);
                 });
             }

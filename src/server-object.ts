@@ -2,6 +2,7 @@ import {isArray} from "util";
 import {arraysAreEqual} from "tslint/lib/utils";
 import {ServerObjectDescriptor} from "./context-module-config";
 export abstract class ServerObject {
+  constructor() {}
 
   /**
    * da implementare nelle sottoclassi, deve tornare i dati che descrivono l'entità da inserire dentro l'oggetto OdataContext di DevExtreme
@@ -68,7 +69,7 @@ export abstract class ServerObject {
   public build(srcObj: any, entityClass: typeof ServerObject) {
     const properties: Array<string> = Object.getOwnPropertyNames(entityClass.getOdataContextEntity().fieldTypes);
     for (const prop of properties) {
-      this[prop] = srcObj[prop];
+      (<any> this)[prop] = (<any> srcObj)[prop];
     }
   }
 }

@@ -5,7 +5,7 @@ import {BehaviorSubject} from "rxjs/BehaviorSubject";
 import {Observable} from "rxjs/Observable";
 
 @Injectable()
-export class NavbarService implements OnInit, OnDestroy{
+export class NavbarService implements OnDestroy {
 
     private _visitedRoutes: Route[] = [];
     private _visitedRoutes$: BehaviorSubject<Route[]> = new BehaviorSubject([]);
@@ -14,7 +14,7 @@ export class NavbarService implements OnInit, OnDestroy{
     constructor(private router: Router) {
         this.subscriptions.push(
             this.router.events
-                .filter(event => event instanceof ResolveEnd)
+                .filter((event) => event instanceof ResolveEnd)
                 .subscribe(
                     (next: ResolveEnd) => {
                         let reset = false;
@@ -29,24 +29,23 @@ export class NavbarService implements OnInit, OnDestroy{
                         if (queryParams) {
                             reset = queryParams.reset === "true";
                         }
-                        if (reset){
+                        if (reset) {
                             this._visitedRoutes = [];
                             this._visitedRoutes$.next(this._visitedRoutes);
                         }
-                        const currentRoute: Route | undefined = this.router.config.find(e => e.path === path);
-
-                        if (currentRoute && currentRoute.data && currentRoute.data.breadcrumb) {
+                        const currentRoute: Route[] = this.router.config.filter((e) => e.path === path);
+                        if (currentRoute && currentRoute.length > 0 && currentRoute[0].data && currentRoute[0].data.breadcrumb) {
                             // const currentBreadcrump: string = this.router.config.find(e => e.path === path).data.breadcrumb;
-                            const index = this._visitedRoutes.findIndex(e => e.path === currentRoute.path);
+                            // const index = this._visitedRoutes.findIndex((e) => e.path === currentRoute[0].path);
+                            const index: number = this._visitedRoutes.indexOf(currentRoute[0]);
                             if (index >= 0) {
                                 this._visitedRoutes = this._visitedRoutes.slice(0, index + 1);
                                 this._visitedRoutes$.next(this._visitedRoutes);
 
                                 // if (!reset)
                                 //     CustomReuseStrategy.componentsReuseList.push("*");
-                            }
-                            else {
-                                this._visitedRoutes.push(currentRoute);
+                            } else {
+                                this._visitedRoutes.push(currentRoute[0]);
                                 this._visitedRoutes$.next(this._visitedRoutes);
                                 // CustomReuseStrategy.componentsReuseList.push("*");
                             }
@@ -57,10 +56,6 @@ export class NavbarService implements OnInit, OnDestroy{
         );
     }
 
-    ngOnInit() {
-
-    }
-
     get visitedRoutes(): Route[] {
         return this._visitedRoutes;
     }
@@ -69,7 +64,7 @@ export class NavbarService implements OnInit, OnDestroy{
         return this._visitedRoutes$.asObservable();
     }
 
-    ngOnDestroy() {
+    public ngOnDestroy() {
         console.log("onDestroy");
         if (this.subscriptions && this.subscriptions.length > 0) {
             for (const subcription of this.subscriptions) {

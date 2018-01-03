@@ -1,33 +1,38 @@
 {
-	"name": "@bds/nt-angular-context",
-	"version": "1.0.24",
-	"description": "angular module to manage devextreme OdataContext and other context utilities",
-	"main": "bundles/nt-angular-context.umd.min.js",
-	"module": "index.js",
-	"typings": "index.d.ts",
-	"keywords": [
-		"angular", "odata", "devextreme", "babel", "bdm", "gdm", "zuk", "nt"
-	],
-	"author": {
-		"name": "gdm",
-		"email": ""
-	},
-	"license": "",
-	"homepage": "",
-	"bugs": {
-		"url": ""
-	},
-	"peerDependencies": {
-		"@angular/common": "~4",
-		"@angular/core": "~4",
-		"@angular/router": "~4",
-		"rxjs": "~5",
-		"zone.js": "^0.8.4",
-		"@types/node": "~6",
-		"devextreme": "~17",
-		"tslint": "~5"
-	},
-	"dependencies": {
-		"moment": "~2"
-	}
+  "name": "@bds/nt-angular-context",
+  "version": "1.0.31",
+  "description": "angular module to manage devextreme OdataContext and other context utilities",
+  "keywords": [
+    "angular",
+    "odata",
+    "devextreme",
+    "babel",
+    "bdm",
+    "gdm",
+    "zuk",
+    "nt"
+  ],
+  "main": "./index.umd.js",
+  "module": "./index.js",
+  "typings": "./index.d.ts",
+  "license": "MIT",
+  "author": {
+    "name": "gdm"
+  },
+  "repository": {},
+  "bugs": {},
+  "homepage": "",
+  "peerDependencies": {
+    "@angular/common": "~4",
+    "@angular/core": "~4",
+    "@angular/router": "~4",
+    "@types/node": "~6",
+    "devextreme": "~17",
+    "rxjs": "~5",
+    "tslint": "~5",
+    "zone.js": "^0.8.4"
+  },
+  "dependencies": {
+    "moment": "~2"
+  }
 }

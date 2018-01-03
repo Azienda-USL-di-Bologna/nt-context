@@ -6,9 +6,9 @@ export class OdataContextFunctionsImportDefinition extends OdataContextDefinitio
         super()
     }
 
-    public buildOdataContext(config: ContextModuleConfig) {
+    public buildOdataContext(config: ContextModuleConfig): void {
       if (!this.odataContext) {
-        super.buildCommonOdataContext(config, <ServerObjectsDescriptor>config.functionsImport);
+        super.buildCommonOdataContext(config, <ServerObjectsDescriptor> config.functionsImport);
         // const entities: Array<string> = Object.getOwnPropertyNames(config.entities);
         // for (const entity of entities) {
         //   this.odataContext[config.entities[entity].name].on("updating", (keys, values) => {

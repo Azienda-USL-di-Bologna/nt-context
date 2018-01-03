@@ -9,7 +9,11 @@ export class OdataContextFactory {
     constructor(@Inject('config') private config: ContextModuleConfig) {
     }
 
-    public setOdataBaseUrl(baseUrl: string) {
+  /**
+   * serve per settare OdataBaseUrl nel caso non sia una costante, ma venga calcolato dinamicamente (come ad esempio in GiPi, dove viene calcolato prendendo l'url dell'applicazione dalla barra degli indirizzi)
+    * @param baseUrl
+   */
+  public setOdataBaseUrl(baseUrl: string): void {
         this.config.odataBaseUrl = baseUrl;
     }
 
