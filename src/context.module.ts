@@ -8,28 +8,36 @@ import {GlobalContextService} from "./global-context.service";
 import {NavbarService} from "./templates/navbar/navbar.service";
 import {NavbarComponent} from "./templates/navbar/navbar.component";
 import {SidebarComponent} from "./templates/sidebar/sidebar.component";
+import {ButtonsBarComponent} from "./templates/buttons-bar/buttons-bar.component";
+
+import {
+  DxButtonModule
+} from "devextreme-angular";
 
 @NgModule({
   imports: [
     CommonModule,
-    RouterModule
+    RouterModule,
+    DxButtonModule
   ],
   declarations: [
     NavbarComponent,
-    SidebarComponent
+    SidebarComponent,
+    ButtonsBarComponent
   ],
   exports: [
     NavbarComponent,
-    SidebarComponent
+    SidebarComponent,
+    ButtonsBarComponent
   ]
 })
 export class ContextModule {
-  static forRoot(config: ContextModuleConfig): ModuleWithProviders {
+  public static forRoot(config: ContextModuleConfig): ModuleWithProviders {
     return {
       ngModule: ContextModule,
       providers: [
           OdataContextFactory,
-          {provide: 'config', useValue: config},
+          {provide: "config", useValue: config},
           GlobalContextService,
           {provide: RouteReuseStrategy, useClass: CustomReuseStrategy},
           NavbarService
