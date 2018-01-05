@@ -22,7 +22,11 @@ export class SidebarComponent implements OnInit {
 
   public isActive(item: SidebarItem){
       let paginaAttuale = this.router.url;
-      paginaAttuale = paginaAttuale.slice(1, -11);
+      const pos: number = paginaAttuale.indexOf("?");
+            if (pos >= 0) {
+              paginaAttuale = paginaAttuale.substring(1, pos);
+            }
+      // paginaAttuale = paginaAttuale.slice(1, -11);
       // console.log("pagina: ", paginaAttuale);
       return item.routerLink === paginaAttuale;
   }
