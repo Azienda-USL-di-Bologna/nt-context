@@ -15,6 +15,10 @@
         <dx-button id="labelReloadButton" text={{reloadButton.label}} icon={{reloadButton.icon}} (onClick)="reload()" [disabled]="reloadButton.disabled"></dx-button>
     </div>
 
+    <div *ngFor="let button of genericButtons">
+        <dx-button id={{button.label}} text={{button.label}} icon={{button.icon}} (onClick)="genericButtonClick(button.label)" [disabled]="button.disabled"></dx-button>
+    </div>
+
     <div>
     </div>
 </div>

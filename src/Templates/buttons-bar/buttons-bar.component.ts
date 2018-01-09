@@ -12,6 +12,7 @@ export class ButtonsBarComponent implements OnInit {
   @Input("saveButton") public saveButton: ButtonAppearance;
   @Input("reloadButton") public reloadButton: ButtonAppearance;
   @Input("restoreButton") public restoreButton: ButtonAppearance;
+  @Input("genericButtons") public genericButtons: ButtonAppearance[];
 
   // comando con la label
   @Output("command") public command = new EventEmitter<any>();
@@ -21,11 +22,12 @@ export class ButtonsBarComponent implements OnInit {
   @Output("onSaveButton") public onSaveButton = new EventEmitter();
   @Output("onReloadButton") public onReloadButton = new EventEmitter();
   @Output("onRestoreButton") public onRestoreButton = new EventEmitter();
+  @Output("onGenericButtonClick") public onGenericButtonClick = new EventEmitter<string>();
 
   constructor(private router: Router) { }
 
-  public ngOnInit() {
-  }
+  // tslint:disable-next-line:no-empty
+  public ngOnInit() {}
 
   public save() {
     this.command.emit("save");
@@ -46,8 +48,14 @@ export class ButtonsBarComponent implements OnInit {
     this.command.emit("restore");
     this.onRestoreButton.emit();
   }
+
+  public genericButtonClick(buttonName: string) {
+    this.command.emit(buttonName);
+    this.onGenericButtonClick.emit(buttonName);
+  }
 }
 
+// tslint:disable-next-line:max-classes-per-file
 export class ButtonAppearance {
   private _label: string = "";
   private _icon: string = "";
@@ -67,7 +75,6 @@ export class ButtonAppearance {
   set label(label: string){
     this._label = label;
   }
-
 
   get icon(): string{
     return this._icon;
@@ -95,4 +102,3 @@ export interface Blocco {
   label: string;
   viewIcon: boolean;
 }
-
