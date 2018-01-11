@@ -16,7 +16,7 @@ export default {
     path: path.join(__dirname, "dist"),
     filename: "[name].js",
     libraryTarget: "umd",
-    library: "ticktock"
+    library: "nt-angular-context"
   },
   resolve: {
     extensions: [ ".ts", ".js", ".json" ]
@@ -79,7 +79,7 @@ export default {
 
     new webpack.optimize.UglifyJsPlugin({
       include: /\.min\.js$/,
-      sourceMap: true
+      sourceMap: false
     }),
 
     new webpack.BannerPlugin({

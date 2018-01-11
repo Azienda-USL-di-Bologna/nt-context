@@ -92,9 +92,10 @@ export class CustomReuseStrategy implements RouteReuseStrategy {
                 attach = true;
                 CustomReuseStrategy.componentsReuseList = CustomReuseStrategy.componentsReuseList.filter((e) => e !== path[0]);
             } else {
-                // const star = CustomReuseStrategy.componentsReuseList.find(e => e === "*");
+                // const star: string = CustomReuseStrategy.componentsReuseList.find((e) => e === "*");
                 const star: string[] = CustomReuseStrategy.componentsReuseList.filter((value) => value  === "*");
                 if (star && star.length > 0) {
+                // if (star) {
                     attach = true;
                     CustomReuseStrategy.componentsReuseList = CustomReuseStrategy.componentsReuseList.filter((e) => e !== star[0]);
                 }
