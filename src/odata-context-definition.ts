@@ -17,25 +17,38 @@ export abstract class OdataContextDefinition {
     public abstract buildOdataContext(config: ContextModuleConfig): void;
 
     protected buildCommonOdataContext(config: ContextModuleConfig, serverObjects: ServerObjectsDescriptor): void {
-      if (!this.odataContext) {
-        this.setCustomConfiguration(config.defaultTimeZoneOffset, config.defaultCurrency);
-        if (config.tokenProvider) {
-          this.odataContext = new ODataContext({
-            url: config.odataBaseUrl,
-            entities: this.getOdataContextServerObjectsDefinition(serverObjects),
-            beforeSend: function (request: any) {
-              // console.info(JSON.stringify(request));
-              request.headers = {"Authorization": "Bearer " + config.tokenProvider!()};
-            }
-          });
+        if (!this.odataContext) {
+            this.setCustomConfiguration(config.defaultTimeZoneOffset, config.defaultCurrency);
+            const oDataContextOptions = {
+                url: config.odataBaseUrl,
+                entities: this.getOdataContextServerObjectsDefinition(serverObjects),
+                withCredentials: config.withCredentials ? config.withCredentials : false,
+                beforeSend: function (request: any) {
+                    // console.info(JSON.stringify(request));
+                    if (config.tokenProvider) {
+                        request.headers = {"Authorization": "Bearer " + config.tokenProvider!()};
+                    }
+                }
+            };
+            this.odataContext = new ODataContext(oDataContextOptions);
+            // if (config.tokenProvider) {
+            //     this.odataContext = new ODataContext({
+            //         url: config.odataBaseUrl,
+            //         entities: this.getOdataContextServerObjectsDefinition(serverObjects),
+            //         beforeSend: function (request: any) {
+            //             // console.info(JSON.stringify(request));
+            //             request.headers = {"Authorization": "Bearer " + config.tokenProvider!()};
+            //         }
+            //     });
+            // }
+            // else {
+            //     this.odataContext = new ODataContext({
+            //         url: config.odataBaseUrl,
+            //         withCredentials: true,
+            //         entities: this.getOdataContextServerObjectsDefinition(serverObjects),
+            //     });
+            // }
         }
-        else {
-          this.odataContext = new ODataContext({
-            url: config.odataBaseUrl,
-            entities: this.getOdataContextServerObjectsDefinition(serverObjects),
-          });
-        }
-      }
     }
 
     public getContext(): ODataContext {
@@ -44,7 +57,10 @@ export abstract class OdataContextDefinition {
 
     protected getOdataContextServerObjectsDefinition(serverObjectsDescriptor: ServerObjectsDescriptor): any {
         const entities: Array<string> = Object.getOwnPropertyNames(serverObjectsDescriptor);
-        return entities.reduce((obj: any, serverObject: any) => {obj[serverObjectsDescriptor[serverObject].name] = serverObjectsDescriptor[serverObject].class.getOdataContextEntity(); return obj}, {});
+        return entities.reduce((obj: any, serverObject: any) => {
+            obj[serverObjectsDescriptor[serverObject].name] = serverObjectsDescriptor[serverObject].class.getOdataContextEntity();
+            return obj
+        }, {});
     }
 
     public fixUpdate(keys: any, values: any, serverObjectName: string): void {
@@ -101,7 +117,7 @@ export abstract class OdataContextDefinition {
         config.default(configObj);
     }
 
-    public customLoading (loadOption: any): void {
+    public customLoading(loadOption: any): void {
         const customLoadingFilterParams: CustomLoadingFilterParams = loadOption.userData["customLoadingFilterParams"]
         // console.log("custom", customLoadingFilterParams);
         // console.log("option", loadOption);

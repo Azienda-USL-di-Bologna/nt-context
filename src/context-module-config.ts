@@ -11,6 +11,8 @@ export interface ContextModuleConfig {
     tokenProvider?: () => string;
     defaultTimeZoneOffset: number;
     defaultCurrency: string;
+    // default a false
+    withCredentials?: boolean;
 };
 
 export interface ServerObjectDescriptor {
