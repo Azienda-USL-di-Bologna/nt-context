@@ -23,6 +23,7 @@ export abstract class OdataContextDefinition {
                 url: config.odataBaseUrl,
                 entities: this.getOdataContextServerObjectsDefinition(serverObjects),
                 withCredentials: config.withCredentials ? config.withCredentials : false,
+                errorHandler: config.errorHandler,
                 beforeSend: function (request: any) {
                     // console.info(JSON.stringify(request));
                     if (config.tokenProvider) {

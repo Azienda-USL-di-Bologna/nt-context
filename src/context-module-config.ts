@@ -13,6 +13,7 @@ export interface ContextModuleConfig {
     defaultCurrency: string;
     // default a false
     withCredentials?: boolean;
+    errorHandler?: (e: any) => void;
 };
 
 export interface ServerObjectDescriptor {

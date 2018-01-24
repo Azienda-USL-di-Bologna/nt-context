@@ -1,6 +1,6 @@
 {
   "name": "@bds/nt-angular-context",
-  "version": "1.0.37",
+  "version": "1.0.38",
   "description": "angular module to manage devextreme OdataContext and other context utilities",
   "keywords": [
     "angular",
@@ -43,6 +43,7 @@
     "prebuild": "rimraf dist tmp",
     "prebuild:watch": "rimraf dist tmp",
     "prepublishOnly": "npm run ci",
+    "publishOnly": "npm publish --registry http://localhost:4873",
     "preversion": "npm run ci",
     "test": "karma start",
     "test:watch": "karma start --auto-watch --no-single-run",
