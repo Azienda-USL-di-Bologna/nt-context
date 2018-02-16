@@ -1,8 +1,9 @@
-import {Component, OnInit} from "@angular/core";
+import {Component, Inject, OnInit} from "@angular/core";
 import {Route} from "@angular/router";
 import {CustomReuseStrategy} from "../../routes/custom-reuse-strategy";
 import {NavbarService} from "./navbar.service";
 import {Observable} from "rxjs/Observable";
+import {ContextModuleConfig} from "../../context-module-config";
 
 @Component({
     moduleId: module.id,
@@ -15,7 +16,8 @@ export class NavbarComponent implements OnInit {
     public visitedRoutes: Route[];
     private visitedRoutesFromService$: Observable<Route[]>;
 
-  constructor(private navbarService: NavbarService) {
+  constructor(private navbarService: NavbarService, @Inject('config') private config: ContextModuleConfig) {
+      console.log(config);
     }
 
     public ngOnInit() {

@@ -1,6 +1,6 @@
 {
   "name": "@bds/nt-angular-context",
-  "version": "1.0.38",
+  "version": "1.0.40",
   "description": "angular module to manage devextreme OdataContext and other context utilities",
   "keywords": [
     "angular",
@@ -23,44 +23,41 @@
   "bugs": {},
   "homepage": "",
   "scripts": {
-    "build": "npm run build:esm && npm run build:umd && npm run copy",
+    "build": "npm run build:esm && npm run build:umd && npm run gen-pkg-dist",
     "build:esm": "gulp inline-templates && npm run ngcompile",
     "build:esm:watch": "gulp build:esm:watch",
     "build:umd": "webpack --config webpack-umd.config.ts",
     "build:umd:watch": "npm run build:umd -- --watch",
     "build:watch": "concurrently --raw \"npm run build:umd:watch\" \"npm run build:esm:watch\"",
-    "ci": "npm run lint && npm run test && npm run build && npm run docs",
     "clean:all": "npm run clean:tmp && rimraf node_modules",
     "clean:tmp": "rimraf coverage dist tmp docs",
     "codecov": "cat coverage/lcov.info | codecov",
     "copy": "copy package-dist.json dist\\package.json",
     "docs": "compodoc -p tsconfig.json -d docs --disableCoverage --disablePrivateOrInternalSupport",
     "explorer": "source-map-explorer ./dist/index.umd.js",
+    "gen-pkg-dist": "package-dist-creator package.json dist",
     "gh-pages": "rimraf docs && npm run docs && gh-pages -d docs",
     "lint": "npm run tslint 'src/**/*.ts'",
     "ngcompile": "node_modules/.bin/ngc -p tsconfig-aot.json",
-    "postversion": "git push && git push --tags",
     "prebuild": "rimraf dist tmp",
     "prebuild:watch": "rimraf dist tmp",
-    "prepublishOnly": "npm run ci",
-    "publishOnly": "npm publish --registry http://localhost:4873",
-    "preversion": "npm run ci",
+    "publish": "cd dist && npm publish",
     "test": "karma start",
     "test:watch": "karma start --auto-watch --no-single-run",
     "tslint": "tslint"
   },
   "dependencies": {
-    "moment": "~2",
     "@angular/common": "~4",
     "@angular/core": "~4",
-    "@angular/forms": "^4.0.0",
+    "@angular/forms": "~4",
     "@angular/router": "~4",
-    "rxjs": "~5",
-    "zone.js": "^0.8.4",
-    "tslint": "~5.3.2",
-    "@types/node": "~6.0.60",
+    "@types/node": "^8.9.3",
     "devextreme": "~17",
-    "devextreme-angular": "~17"
+    "devextreme-angular": "~17",
+    "moment": "~2",
+    "rxjs": "~5",
+    "tslint": "~5.3.2",
+    "zone.js": "^0.8.4"
   },
   "devDependencies": {
     "@angular/common": "^4.0.0",
@@ -98,6 +95,7 @@
     "karma-sourcemap-loader": "^0.3.7",
     "karma-webpack": "^2.0.3",
     "node-sass": "^4.7.2",
+    "package-dist-creator": "0.0.1",
     "raw-loader": "^0.5.1",
     "rimraf": "^2.6.1",
     "rxjs": "^5.3.1",
@@ -112,5 +110,19 @@
     "webpack-angular-externals": "^1.0.2",
     "webpack-rxjs-externals": "^1.0.0",
     "zone.js": "^0.8.10"
+  },
+  "distPeerDependencies": {
+    "@angular/common": "~4",
+    "@angular/core": "~4",
+    "@angular/router": "~4",
+    "@types/node": "~8",
+    "devextreme": "~17",
+    "devextreme-angular": "~17",
+    "rxjs": "~5",
+    "tslint": "~5",
+    "zone.js": "^0.8.4"
+  },
+  "distDependencies": {
+    "moment": "~2"
   }
 }

@@ -23,6 +23,22 @@
     "use-input-property-decorator": true,
     "use-output-property-decorator": true,
     "use-pipe-transform-interface": true,
-    "variable-name": [true, "allow-leading-underscore", "ban-keywords", "check-format"]
+    "variable-name": [true, "allow-leading-underscore", "ban-keywords", "check-format"],
+    "member-ordering": [
+      true,
+      {
+        "order": [
+          "private-instance-field",
+          "private-static-field",
+          "public-instance-field",
+          "public-static-field",
+          "private-constructor",
+          "public-constructor",
+          "private-instance-method",
+          "public-instance-method",
+          "protected-instance-method"
+        ]
+      }
+    ]
   }
 }
