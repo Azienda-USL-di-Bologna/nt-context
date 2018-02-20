@@ -1,11 +1,12 @@
-import {ContextModuleConfig, ServerObjectsDescriptor} from "../context-module-config";
+import {ContextModuleConfig} from "../context-module-config";
 import ODataContext from "devextreme/data/odata/context";
 import {keyConverters, EdmLiteral} from "devextreme/data/odata/utils";
 import * as moment from "moment";
 import * as config from "devextreme/core/config";
-import {OdataForeignKey} from "../model/server-object";
+import {OdataForeignKey, ServerObject} from "../model/server-object";
 import {CustomLoadingFilterParams} from "./custom-loading-filter-params";
 import {isArray} from "util";
+import {ServerObjectsConfiguration} from "../model/server-objects-configuration";
 
 export abstract class OdataContextDefinition {
 
@@ -79,7 +80,7 @@ export abstract class OdataContextDefinition {
         }
     }
 
-    protected buildCommonOdataContext(config: ContextModuleConfig, serverObjects: ServerObjectsDescriptor): void {
+    protected buildCommonOdataContext(config: ContextModuleConfig, serverObjects: ServerObjectsConfiguration): void {
         if (!this.odataContext) {
             this.setCustomConfiguration(config.defaultTimeZoneOffset, config.defaultCurrency);
             const oDataContextOptions = {
@@ -147,10 +148,10 @@ export abstract class OdataContextDefinition {
         config.default(configObj);
     }
 
-    protected getOdataContextServerObjectsDefinition(serverObjectsDescriptor: ServerObjectsDescriptor): any {
-        const entities: string[] = Object.getOwnPropertyNames(serverObjectsDescriptor);
+    protected getOdataContextServerObjectsDefinition(serverObjects: ServerObjectsConfiguration): any {
+        const entities: ServerObject[] = serverObjects.getServerObjectsList();
         return entities.reduce((obj: any, serverObject: any) => {
-            obj[serverObjectsDescriptor[serverObject].getName()] = serverObjectsDescriptor[serverObject].getOdataContextEntity();
+            obj[serverObject.getName()] = serverObject.getOdataContextEntity();
             return obj;
         }, {});
     }

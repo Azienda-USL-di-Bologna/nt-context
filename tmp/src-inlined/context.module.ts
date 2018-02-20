@@ -32,12 +32,12 @@ import {
   ]
 })
 export class ContextModule {
-  public static forRoot(config: ContextModuleConfig): ModuleWithProviders {
+  public static forRoot(ntContextConfig: ContextModuleConfig): ModuleWithProviders {
     return {
       ngModule: ContextModule,
       providers: [
           OdataContextFactory,
-          {provide: "config", useValue: config},
+          {provide: "ntContextConfig", useValue: ntContextConfig},
           GlobalContextService,
           {provide: RouteReuseStrategy, useClass: CustomReuseStrategy},
           NavbarService

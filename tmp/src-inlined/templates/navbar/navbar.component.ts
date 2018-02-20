@@ -43,11 +43,10 @@ import {ContextModuleConfig} from "../../context-module-config";
 })
 export class NavbarComponent implements OnInit {
 
-    public visitedRoutes: Route[];
     private visitedRoutesFromService$: Observable<Route[]>;
+    public visitedRoutes: Route[];
 
-  constructor(private navbarService: NavbarService, @Inject('config') private config: ContextModuleConfig) {
-      console.log(config);
+    constructor(private navbarService: NavbarService) {
     }
 
     public ngOnInit() {

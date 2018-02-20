@@ -1,5 +1,5 @@
 import {OdataContextDefinition} from "./odata-context-definition";
-import {ContextModuleConfig, ServerObjectsDescriptor} from "../context-module-config";
+import {ContextModuleConfig} from "../context-module-config";
 export class OdataContextFunctionsImportDefinition extends OdataContextDefinition {
 
     constructor() {
@@ -8,7 +8,7 @@ export class OdataContextFunctionsImportDefinition extends OdataContextDefinitio
 
     public buildOdataContext(config: ContextModuleConfig): void {
       if (!this.odataContext) {
-        super.buildCommonOdataContext(config, config.functionsImport as ServerObjectsDescriptor);
+        super.buildCommonOdataContext(config, config.functionsImport());
       }
     }
 }

@@ -6,32 +6,32 @@ import {OdataContextFunctionsImportDefinition} from "./odata-context-functions-i
 
 @Injectable()
 export class OdataContextFactory {
-    constructor(@Inject("config") private config: ContextModuleConfig) {
+    constructor(@Inject("ntContextConfig") private ntContextConfig: ContextModuleConfig) {
     }
 
   /**
    * serve per settare OdataBaseUrl nel caso non sia una costante, ma venga calcolato dinamicamente (come ad esempio in GiPi, dove viene calcolato prendendo l'url dell'applicazione dalla barra degli indirizzi)
    * @param baseUrl
    */
-  public setOdataBaseUrl(baseUrl: string): void {
-        this.config.odataBaseUrl = baseUrl;
+    public setOdataBaseUrl(baseUrl: string): void {
+        this.ntContextConfig.odataBaseUrl = baseUrl;
     }
 
     public buildOdataContextEntitiesDefinition(): OdataContextEntitiesDefinition {
         const odataContextEntitiesDefinition: OdataContextEntitiesDefinition = new OdataContextEntitiesDefinition();
-        odataContextEntitiesDefinition.buildOdataContext(this.config);
+        odataContextEntitiesDefinition.buildOdataContext(this.ntContextConfig);
         return odataContextEntitiesDefinition;
     }
 
     public buildOdataContextViewsDefinition(): OdataContextViewsDefinition {
         const odataContextViewsDefinition: OdataContextViewsDefinition = new OdataContextViewsDefinition();
-        odataContextViewsDefinition.buildOdataContext(this.config);
+        odataContextViewsDefinition.buildOdataContext(this.ntContextConfig);
         return odataContextViewsDefinition;
     }
 
     public buildOdataFunctionsImportDefinition(): OdataContextFunctionsImportDefinition {
         const odataContextFunctionsImportDefinition: OdataContextFunctionsImportDefinition = new OdataContextFunctionsImportDefinition();
-        odataContextFunctionsImportDefinition.buildOdataContext(this.config);
+        odataContextFunctionsImportDefinition.buildOdataContext(this.ntContextConfig);
         return odataContextFunctionsImportDefinition;
     }
 }

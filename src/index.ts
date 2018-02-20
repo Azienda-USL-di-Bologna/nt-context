@@ -8,10 +8,13 @@ export { CustomLoadingFilterParams } from "./odata-context/custom-loading-filter
 export { GlobalContextService} from "./service/global-context.service";
 export { NavbarComponent } from "./templates/navbar/navbar.component";
 export { NavbarService } from "./templates/navbar/navbar.service";
-export {SidebarComponent, SidebarItem} from  "./templates/sidebar/sidebar.component";
-export {ButtonsBarComponent, ButtonAppearance} from  "./templates/buttons-bar/buttons-bar.component";
-export {OdataForeignKey, ServerObject} from  "./model/server-object";
-export {Entity} from  "./model/entity";
-export {View} from  "./model/view";
-export {FunctionImport} from  "./model/function-import";
-export {ContextModuleConfig} from  "./context-module-config";
+export { SidebarComponent, SidebarItem} from  "./templates/sidebar/sidebar.component";
+export { ButtonsBarComponent, ButtonAppearance } from  "./templates/buttons-bar/buttons-bar.component";
+export { OdataForeignKey, ServerObject } from  "./model/server-object";
+export { Entity } from  "./model/entity";
+export { View } from  "./model/view";
+export { FunctionImport } from  "./model/function-import";
+export { ContextModuleConfig } from  "./context-module-config";
+// export { ServerObjectsDescriptor } from "./model/server-objects-descriptor";
+export { ServerObjectsConfiguration, ServerObjectsDescriptor } from "./model/server-objects-configuration";
+
