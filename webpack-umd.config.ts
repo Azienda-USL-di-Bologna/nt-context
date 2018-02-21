@@ -4,7 +4,7 @@ import * as fs from "fs";
 import * as angularExternals from "webpack-angular-externals";
 import * as rxjsExternals from "webpack-rxjs-externals";
 
-const pkg = JSON.parse(fs.readFileSync("./package-dist.json").toString());
+const pkg = JSON.parse(fs.readFileSync("./package.json").toString());
 const uglifyJSPlugin = require("uglifyjs-webpack-plugin");
 
 export default {

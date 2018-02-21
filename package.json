@@ -1,5 +1,5 @@
 {
-  "name": "@bds/nt-angular-context",
+  "name": "@bds/nt-context",
   "version": "1.0.40",
   "description": "angular module to manage devextreme OdataContext and other context utilities",
   "keywords": [
