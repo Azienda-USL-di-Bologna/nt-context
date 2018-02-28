@@ -109,7 +109,9 @@ export abstract class ServerObject {
   public static cloneObject(obj: any): any {
     let clone: any = {};
     for (let i in obj) {
-      if (obj[i] != null && typeof (obj[i]) === "object")
+      if (obj[i] && obj[i] instanceof Date)
+        clone[i] = obj[i];
+      else if (obj[i] != null && typeof (obj[i]) === "object")
         clone[i] = this.cloneObject(obj[i]);
       else
         clone[i] = obj[i];
