@@ -6,6 +6,7 @@ export { OdataContextFunctionsImportDefinition } from "./odata-context/odata-con
 export { OdataContextViewsDefinition } from "./odata-context/odata-context-views-definition";
 export { CustomLoadingFilterParams } from "./odata-context/custom-loading-filter-params";
 export { GlobalContextService} from "./service/global-context.service";
+export { CustomReuseStrategy, ReuseStrategyParams } from "./routes/custom-reuse-strategy";
 export { NavbarComponent } from "./templates/navbar/navbar.component";
 export { NavbarService } from "./templates/navbar/navbar.service";
 export { SidebarComponent, SidebarItem} from  "./templates/sidebar/sidebar.component";
