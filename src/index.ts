@@ -4,6 +4,7 @@ export { OdataContextDefinition} from "./odata-context/odata-context-definition"
 export { OdataContextEntitiesDefinition } from "./odata-context/odata-context-entities-definition";
 export { OdataContextFunctionsImportDefinition } from "./odata-context/odata-context-functions-import-definition";
 export { OdataContextViewsDefinition } from "./odata-context/odata-context-views-definition";
+export { OdataCustomStore } from "./odata-context/odata-custom-store";
 export { CustomLoadingFilterParams } from "./odata-context/custom-loading-filter-params";
 export { GlobalContextService} from "./service/global-context.service";
 export { CustomReuseStrategy, ReuseStrategyParams } from "./routes/custom-reuse-strategy";
@@ -16,6 +17,9 @@ export { Entity } from  "./model/entity";
 export { View } from  "./model/view";
 export { FunctionImport } from  "./model/function-import";
 export { ContextModuleConfig } from  "./context-module-config";
-// export { ServerObjectsDescriptor } from "./model/server-objects-descriptor";
 export { ServerObjectsConfiguration, ServerObjectsDescriptor } from "./model/server-objects-configuration";
-
+export { ResponseMessages } from "./error-handling/response-messages";
+export { Message } from "./error-handling/message";
+export { ErrorMessage} from "./error-handling/error-message";
+export { WarningMessage } from "./error-handling/warning-message";
+export { NoticeMessage } from "./error-handling/notice-message";

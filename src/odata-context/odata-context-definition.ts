@@ -36,6 +36,10 @@ export abstract class OdataContextDefinition {
         // console.log(keys, values, serverObjectName);
 
         // const fields = this.dataSource.store()["_fieldTypes"];
+        values = this.createFixedValues(values, serverObjectName);
+    }
+
+    public createFixedValues(values: any, serverObjectName: string): string {
         const fields: any = (this.odataContext as any)[serverObjectName]._fieldTypes;
         for (const value in values) {
             // console.log("value", value);
@@ -51,6 +55,8 @@ export abstract class OdataContextDefinition {
                     fields[field].getTargetEntity(), values[field][fields[field].getKeyName()]);
             }
         }
+
+        return values;
     }
 
     public customLoading(loadOption: any): void {
@@ -142,7 +148,7 @@ export abstract class OdataContextDefinition {
             forceIsoDateParsing: true
         };
 
-        Date.prototype.toJSON = function () {
+        Date.prototype.toJSON = function() {
             return moment(this).format();
         };
         config.default(configObj);
