@@ -45,6 +45,8 @@ export abstract class OdataContextDefinition {
             // console.log("value", value);
             if (!fields[value]) {
                 delete (values)[value];
+            }  else if (values[value] === "") {
+                values[value] = null;
             }
         }
 

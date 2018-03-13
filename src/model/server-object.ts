@@ -64,38 +64,33 @@ export abstract class ServerObject {
   /**
    * ritorna un set di campi modificati
    * i campi da controllare vengono passati nell'oggetto dataFieldDescription, dove la chiave è il nome del campo dell'oggetto e il valore è la descrizione da mostrare
-   * @param datafieldsDescription 
-   * @param obj1 
-   * @param obj2 
+   * @param datafieldsDescription
+   * @param obj1
+   * @param obj2
+   * @returns {string[]}
    */
-  public static compareObjs(datafieldsDescription: any, obj1: any, obj2: any): string[] {
-    let differences: string[] = [];
-    let propToCompare: string[] = Object.getOwnPropertyNames(datafieldsDescription);
+  public static compareObjs(datafieldsDescription: any, obj1: any, obj2: any) {
+
+    const differences: string[] = [];
+    const propToCompare: string[] = Object.getOwnPropertyNames(datafieldsDescription);
     propToCompare.forEach(p => {
       // se sono tutti e due null o undefined -> sono uguali
-      if ((obj1[p] === null || obj1[p] === undefined) && (obj2[p] === null || obj2[p] === undefined)) {
+      if ((!obj1[p] || obj1[p] === "") && (!obj2[p] || obj2[p] === "")) {
         return;
-      }
-      // se sono uno è valorizzato e l'altro no -> sono diversi
-      else if (((obj1[p] === null || obj1[p] === undefined) && (obj2[p] !== null && obj2[p] !== undefined))
-        || ((obj1[p] !== null && obj1[p] !== undefined) && (obj2[p] === null || obj2[p] === undefined))) {
+      } else if (((!obj1[p] || obj1[p] === "") && obj2[p])  // se sono uno è valorizzato e l'altro no -> sono diversi
+        || (obj1[p] && (!obj2[p] || obj2[p] === ""))) {
         differences.push(datafieldsDescription[p]);
-      }
-      // se sono tutti e due valorizzati vado a confrontarli
-      else if ((obj1[p] !== null && obj1[p] !== undefined) && (obj2[p] !== null && obj2[p] !== undefined)) {
+      } else if (obj1[p] && obj2[p]) { // se sono tutti e due valorizzati vado a confrontarli
         // tipo data
         if (obj1[p] instanceof Date) {
           if (obj1[p].toString() !== obj2[p].toString()) {
             differences.push(datafieldsDescription[p]);
           }
-        }
-        // tipo oggetto
-        else if (typeof obj1[p] === "object") {
-          if (!Entity.isEquals(obj1[p], obj2[p])) {
+        } else if (typeof obj1[p] === "object") { // tipo oggetto
+          if (!ServerObject.isEquals(obj1[p], obj2[p])) {
             differences.push(datafieldsDescription[p]);
           }
-        }
-        else {
+        } else {
           // altri tipi (stringhe o numeri)
           if (obj1[p] !== obj2[p]) {
             differences.push(datafieldsDescription[p]);
@@ -104,31 +99,32 @@ export abstract class ServerObject {
       }
     });
     return differences;
-  }
+}
 
-  public static cloneObject(obj: any): any {
-    let clone: any = {};
-    for (let i in obj) {
-      if (obj[i] && obj[i] instanceof Date)
-        clone[i] = obj[i];
-      else if (obj[i] != null && typeof (obj[i]) === "object")
-        clone[i] = this.cloneObject(obj[i]);
-      else
-        clone[i] = obj[i];
+public static cloneObject(obj: any): any {
+  const clone: any = {};
+  for (const i in obj) {
+    if (obj[i] && obj[i] instanceof Date) {
+      clone[i] = obj[i];
+    } else if (obj[i] != null && typeof (obj[i]) === "object") {
+      clone[i] = this.cloneObject(obj[i]);
+    } else {
+      clone[i] = obj[i];
     }
-    return clone;
   }
+  return clone;
+}
 
 
   /**
    * costruisce l'oggetto a partire dai dati raw popolando le proprietà indicate nei fieldTypes dell'oggetto tornato dal metodo getOdataContextEntity()
    */
   public build(srcObj: any) {
-    const properties: string[] = Object.getOwnPropertyNames(this.getOdataContextEntity().fieldTypes);
-    for (const prop of properties) {
-      (this as any)[prop] = (srcObj as any)[prop];
-    }
+  const properties: string[] = Object.getOwnPropertyNames(this.getOdataContextEntity().fieldTypes);
+  for (const prop of properties) {
+    (this as any)[prop] = (srcObj as any)[prop];
   }
+}
 
   /**
    * rappresenta il nome dell'entity così come è scritto nella risposta ODATA (= EDM)
