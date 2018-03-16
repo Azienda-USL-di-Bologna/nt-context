@@ -1,21 +1,24 @@
 export class CustomLoadingFilterParams {
 
-  private targetField: string;
-  private filter: any[];
+  private _filters: FieldFilter[] = [];
+  // private filter: any[];
 
-  constructor(targetField: string) {
-    this.targetField = targetField;
+  constructor() {
   }
 
-  public addFilter(filter: any[]) {
-    this.filter = filter;
+  public addFilter(targetField: string, filter: any[]) {
+    this._filters.push({
+        targetField: targetField,
+        filter: filter
+    });
   }
 
-  public getTargetField(): string {
-    return this.targetField;
+  public get filters() {
+    return this._filters;
   }
+}
 
-  public getFilter() {
-    return this.filter;
-  }
+export interface FieldFilter {
+  targetField: string;
+  filter: any[];
 }

@@ -1,6 +1,6 @@
 {
   "name": "@bds/nt-context",
-  "version": "1.0.43",
+  "version": "1.0.44",
   "description": "angular module to manage devextreme OdataContext and other context utilities",
   "keywords": [
     "angular",
