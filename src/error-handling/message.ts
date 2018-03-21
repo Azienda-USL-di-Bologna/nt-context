@@ -1,5 +1,6 @@
 export abstract class Message {
 
+    protected _isBdsException: boolean;
     protected _code: number;
     protected _message: string;
     protected _detail: string;
@@ -8,6 +9,14 @@ export abstract class Message {
         this.code = code;
         this.message = message;
         this.detail = detail;
+    }
+
+    public get isBdsException() {
+        return this._isBdsException;
+    }
+
+    public set isBdsException(value: boolean) {
+        this._isBdsException = value;
     }
 
     public get code() {
