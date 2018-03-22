@@ -9,6 +9,7 @@ import {NavbarService} from "./templates/navbar/navbar.service";
 import {NavbarComponent} from "./templates/navbar/navbar.component";
 import {SidebarComponent} from "./templates/sidebar/sidebar.component";
 import {ButtonsBarComponent} from "./templates/buttons-bar/buttons-bar.component";
+import {MomentModule} from "angular2-moment";
 
 import {
   DxButtonModule
@@ -18,7 +19,8 @@ import {
   imports: [
     CommonModule,
     RouterModule,
-    DxButtonModule
+    DxButtonModule,
+    MomentModule
   ],
   declarations: [
     NavbarComponent,
