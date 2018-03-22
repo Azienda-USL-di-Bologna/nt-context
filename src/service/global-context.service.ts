@@ -22,18 +22,19 @@ export class GlobalContextService {
         return this._innerSharedObject[name];
     }
 
-    public getSubjectInnerSharedObject(name: string): Observable<any>{
+    public getSubjectInnerSharedObject(name: string): Observable<any> {
         if (!this._subjectSharedObject[name]) {
             this._subjectSharedObject[name] = new BehaviorSubject(null);
         }
         return this._subjectSharedObject[name].asObservable();
     }
 
-    public setSubjectInnerSharedObject(name: string, innerSharedObject: any): void{
-        if (!this._subjectSharedObject[name]){
-            this._subjectSharedObject[name] = new BehaviorSubject(null);
+    public setSubjectInnerSharedObject(name: string, innerSharedObject: any): void {
+        if (!this._subjectSharedObject[name]) {
+            this._subjectSharedObject[name] = new BehaviorSubject(innerSharedObject);
+        } else {
+          this._subjectSharedObject[name].next(innerSharedObject);
         }
-        this._subjectSharedObject[name].next(innerSharedObject);
     }
 
     public setInnerSharedObject(name: string, innerSharedObject: any): void {
