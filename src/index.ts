@@ -1,3 +1,5 @@
+import {OdataUtilities} from "./odata-context/odata-utilities";
+
 export { ContextModule } from "./context.module";
 export { OdataContextFactory} from "./odata-context/odata-context-factory";
 export { OdataContextDefinition} from "./odata-context/odata-context-definition";
@@ -6,6 +8,7 @@ export { OdataContextFunctionsImportDefinition } from "./odata-context/odata-con
 export { OdataContextViewsDefinition } from "./odata-context/odata-context-views-definition";
 export { OdataCustomStore } from "./odata-context/odata-custom-store";
 export { CustomLoadingFilterParams } from "./odata-context/custom-loading-filter-params";
+export { OdataUtilities } from "./odata-context/odata-utilities";
 export { GlobalContextService} from "./service/global-context.service";
 export { CustomReuseStrategy, ReuseStrategyParams } from "./routes/custom-reuse-strategy";
 export { NavbarComponent } from "./templates/navbar/navbar.component";

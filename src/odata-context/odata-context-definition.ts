@@ -45,14 +45,16 @@ export abstract class OdataContextDefinition {
         currentFilter[i] = this.fixFilter(currentFilter[i], customFilters);
       }
     } else {
-      const currentField = currentFilter[0];
-      const currentValue = currentFilter[2];
+      if (Array.isArray(currentFilter)) {
+        const currentField = currentFilter[0];
+        const currentValue = currentFilter[2];
 
-      const targetFilter = this.getFilter(currentField, customFilters);
-      if (targetFilter) {
-        let myFilter: any = targetFilter.filter;
-        myFilter = this.buildFilter(myFilter, targetFilter.targetField, currentValue);
-        return myFilter;
+        const targetFilter = this.getFilter(currentField, customFilters);
+        if (targetFilter) {
+          let myFilter: any = targetFilter.filter;
+          myFilter = this.buildFilter(myFilter, targetFilter.targetField, currentValue);
+          return myFilter;
+        }
       }
     }
     return currentFilter;

@@ -9,11 +9,9 @@ import {NavbarService} from "./templates/navbar/navbar.service";
 import {NavbarComponent} from "./templates/navbar/navbar.component";
 import {SidebarComponent} from "./templates/sidebar/sidebar.component";
 import {ButtonsBarComponent} from "./templates/buttons-bar/buttons-bar.component";
+import {OdataUtilities} from "./odata-context/odata-utilities";
+import {DxButtonModule} from "devextreme-angular";
 import {MomentModule} from "angular2-moment";
-
-import {
-  DxButtonModule
-} from "devextreme-angular";
 
 @NgModule({
   imports: [
@@ -41,6 +39,7 @@ export class ContextModule {
           OdataContextFactory,
           {provide: "ntContextConfig", useValue: ntContextConfig},
           GlobalContextService,
+          OdataUtilities,
           {provide: RouteReuseStrategy, useClass: CustomReuseStrategy},
           NavbarService
       ]
