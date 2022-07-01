@@ -1,0 +1,9 @@
+syntax: glob
+.editorconfig
+.gitignore
+.idea
+e2e
+node_modules
+dist
+npm-debug.log
+.tmp
